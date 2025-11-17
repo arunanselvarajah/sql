@@ -54,7 +54,29 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+CUSTOMER_ADDRESS (Type 1) - Overwrite
+-------------------------
+address_id (PK)
+customer_id (FK)
+street
+city
+province
+postal_code
+
+
+CUSTOMER_ADDRESS (Type 2) - Historical
+-------------------------
+address_key (PK)
+customer_id (FK)
+street
+city
+province
+postal_code
+effective_start_date
+effective_end_date
+is_current_flag
+
+
 ```
 
 ***
@@ -183,5 +205,16 @@ Consider, for example, concepts of labour, bias, LLM proliferation, moderating c
 
 
 ```
-Your thoughts...
-```
+Vicki Boykis’ article “Neural nets are just people all the way down” provides a clear reminder that artificial intelligence, no matter how sophisticated it seems, is built entirely on human labor and human choices. AI systems, particularly neural networks, are often perceived as autonomous or magical, but their foundations are deeply human. Every dataset, every label, every classification is the product of people making decisions. Understanding this shifts the conversation about AI from one of purely technical challenges to one of ethics, fairness, and accountability.
+
+A central ethical issue is labor. Modern machine learning systems rely on massive datasets that must be cleaned, labeled, and curated by humans. ImageNet, one of the most famous datasets in AI research, contains millions of images manually labeled by thousands of people using platforms like Amazon Mechanical Turk. This work is often low paid, invisible, and emotionally taxing. Boykis draws attention to the fact that while AI feels automated, it actually depends on extensive human effort behind the scenes. Recognizing this labor is important because it raises questions about fairness, compensation, and the social costs of technology.
+
+Bias is another major concern. AI systems learn from human data, and that data reflects existing societal inequalities, stereotypes, and assumptions. If a dataset overrepresents certain groups or includes mislabeled or offensive content, AI can reinforce or amplify these biases. The example of ImageNet Roulette, where people were mislabeled with inappropriate or offensive terms, demonstrates how seemingly small errors in human labeling can have wide-reaching consequences. Ethical AI design must include strategies to detect, prevent, and correct bias, and it must consider who is making the labeling decisions and how those decisions influence the system.
+
+The proliferation of AI also presents ethical challenges. Large language models and neural networks require enormous computational power and resources, often concentrated in the hands of a few corporations or institutions. This concentration of power raises questions about who controls AI, who benefits from it, and who bears the risks. Additionally, AI is deployed in high-stakes contexts like facial recognition, content moderation, and decision making in healthcare or hiring, where errors or bias can have serious real-world consequences.
+
+Transparency and accountability are essential ethical considerations. Since AI systems rely on complex layers of data, models, and human input, it can be difficult to trace decisions or explain outcomes. When AI misclassifies or causes harm, responsibility cannot rest with the machine. Humans—engineers, data curators, organizations—must remain accountable. Boykis emphasizes that understanding the human foundations of AI is necessary for creating systems that are fair, responsible, and socially aware.
+
+Finally, the article highlights the intersection of technology and society. AI is not neutral. It embodies human choices, labor practices, and cultural assumptions. Whether it is classifying images, moderating content, or providing recommendations, AI reflects and shapes social values. Ethical engagement with AI therefore requires careful reflection on how data is collected, how models are trained, and how outputs are used. It also requires ongoing oversight and a commitment to correct mistakes, just as the ImageNet team began manually addressing offensive labels in the person subtree of their dataset.
+
+In sum, Boykis’ message is both simple and profound. Neural networks are not autonomous systems acting independently. They are human creations built layer by layer on human work and judgment. Ethical AI cannot be achieved through technology alone. It demands recognition of human labor, careful attention to bias, transparency in decision making, accountability for outcomes, and awareness of the social and cultural impacts of the systems we build.```
