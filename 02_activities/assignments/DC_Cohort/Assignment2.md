@@ -54,7 +54,29 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+CUSTOMER_ADDRESS (Type 1) - Overwrite
+-------------------------
+address_id (PK)
+customer_id (FK)
+street
+city
+province
+postal_code
+
+
+CUSTOMER_ADDRESS (Type 2) - Historical
+-------------------------
+address_key (PK)
+customer_id (FK)
+street
+city
+province
+postal_code
+effective_start_date
+effective_end_date
+is_current_flag
+
+
 ```
 
 ***
