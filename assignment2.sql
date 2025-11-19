@@ -1,7 +1,7 @@
 /* ASSIGNMENT 2 */
 /* SECTION 2 */
 
--- COALESCE
+-- COALESCE    
 /* 1. Our favourite manager wants a detailed long list of products, but is afraid of tables! 
 We tell them, no problem! We can produce a list with all of the appropriate details. 
 
@@ -139,30 +139,30 @@ HINT: There are a possibly a few ways to do this query, but if you're struggling
 3) Query the second temp table twice, once for the best day, once for the worst day, 
 with a UNION binding them. */
 
-WITH total_sales_per_day AS (
-  SELECT
-    market_date,
-    SUM(quantity * original_price) AS total_sales
-  FROM vendor_inventory
-  GROUP BY market_date
+WITH daily_sales AS (
+    SELECT
+        cp.market_date,
+        SUM(cp.qty_purchased * cp.cost_to_customer_per_qty) AS total_sales
+    FROM customer_purchases cp
+    GROUP BY cp.market_date
 ),
+
 ranked_days AS (
-  SELECT
-    market_date,
-    total_sales,
-    RANK() OVER (ORDER BY total_sales DESC) AS best_rank,
-    RANK() OVER (ORDER BY total_sales ASC)  AS worst_rank
-  FROM total_sales_per_day
+    SELECT
+        market_date,
+        total_sales,
+        CASE
+            WHEN total_sales = (SELECT MAX(total_sales) FROM daily_sales) THEN 'Best Day'
+            WHEN total_sales = (SELECT MIN(total_sales) FROM daily_sales) THEN 'Worst Day'
+        END AS label
+    FROM daily_sales
 )
-SELECT market_date, total_sales, 'Best Day' AS label
-FROM ranked_days
-WHERE best_rank = 1
 
-UNION
-
-SELECT market_date, total_sales, 'Worst Day' AS label
+SELECT *
 FROM ranked_days
-WHERE worst_rank = 1;
+WHERE label IS NOT NULL
+ORDER BY total_sales DESC;
+
 
 
 
